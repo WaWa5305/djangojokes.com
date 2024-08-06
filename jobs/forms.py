@@ -45,7 +45,7 @@ class JobApplicationForm(forms.ModelForm):
             ),
             'start_date': forms.SelectDateWidget(
                 attrs = {
-                    'style': 'width: 21%; display: inline-block; margin: 0 1%'
+                    'style': 'width: 31%; display: inline-block; margin: 0 1%'
                 },
                 years = range(datetime.now().year, datetime.now().year+2)
             ),
