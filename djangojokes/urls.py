@@ -29,7 +29,7 @@ urlpatterns = [
     path('account/', include('allauth.urls')),
     
     # private media
-    path('media/private/' include(private_storage.urls)),
+    #path('media/private/', include(private_storage.urls)),
     
     # Local Apps
     path('jobs/', include('jobs.urls')),
