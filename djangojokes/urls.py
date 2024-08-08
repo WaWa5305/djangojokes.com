@@ -28,6 +28,9 @@ urlpatterns = [
     path('account/', include('users.urls')),
     path('account/', include('allauth.urls')),
     
+    # private media
+    path('media/private/' include(private_storage.urls)),
+    
     # Local Apps
     path('jobs/', include('jobs.urls')),
     path('jokes/', include('jokes.urls')),
