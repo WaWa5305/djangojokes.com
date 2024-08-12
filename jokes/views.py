@@ -1,4 +1,5 @@
 import json
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -7,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView, UpdateView) 
 from .models import Joke, JokeVote
 from .forms import JokeForm
+
 
 class JokeDetailView(DetailView):
     model = Joke
@@ -66,6 +68,12 @@ class JokeListView(ListView):
     def get_queryset(self):
         ordering = self.get_ordering()
         qs = Joke.objects.all()
+        
+        if 'q' in self.request.GET:
+            q = self.request.GET.get('q')
+            qs = qs.filter()
+            Q(question__icontains=q) | Q(answer__icontains=q)
+            
 
         if 'slug' in self.kwargs: # Filter by category or tag
             slug = self.kwargs['slug']
@@ -77,6 +85,9 @@ class JokeListView(ListView):
             username = self.kwargs['username']
             qs = qs.filter(user__username=username)
 
+
+       
+       
         return qs.order_by(ordering)
 
 class JokeCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
