@@ -88,7 +88,7 @@ class JokeListView(ListView):
 
        
        
-        return qs.order_by(ordering)
+        return qs.prefetch_related('category', 'user').order_by(ordering)
 
 class JokeCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Joke
