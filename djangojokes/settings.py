@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'bi5j3yd=1&5i4d^0d)f*a8sk0kwmpdghq#3$8tm48gvbpvnb*h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = 'djangojoked'.herokuapp.com'
+                 
 INTERNAL_IPS = [ # Necessary for the Debug Toolbar
     '127.0.0.1',
 ]
@@ -103,16 +103,10 @@ WSGI_APPLICATION = 'djangojokes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jokes',
-        'USER': 'postgres',
-        'PASSWORD': 'Honeys40',
-        'HOST': 'localhost',
-        'PORT': 5432
-    }
-}
+import dj_database_url
+
+DATABASES = { 'default' : dj_database_url.config()}
+
 
 # EMAIL
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
